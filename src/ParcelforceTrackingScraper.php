@@ -27,6 +27,10 @@ class ParcelforceTrackingScraper {
             throw new \Exception('No events available yet');
         }
 
+        if (strpos($this->response['data'], 'We have no tracks for your parcel yet.') !== false) {
+            throw new \Exception('No events available yet');
+        }
+
         preg_match_all('/td class="tracking-history-date">([0-9\/]+)</', $this->response['data'], $dates);
         $dates = $dates[1];
 
